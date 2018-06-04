@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit post{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item active"><a href="{% url 'home'%}">Accueil</a></li>
+<li class="breadcrumb-item active"><a href="{% url 'index_tabia'%}">TABIA</a></li>
+<li class="breadcrumb-item active">Correction</li>
+{% endblock %}
+
+{% block content %}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+     {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Save changes</button>
+    <a href="#" class="btn btn-outline-secondary" role="button">Cancel</a>
+  </form>
+{% endblock %}

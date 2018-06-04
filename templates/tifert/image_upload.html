@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item active"><a href="{% url 'home'%}">Accueil</a></li>
+<li class="breadcrumb-item active"><a href="{% url 'index_rj'%}">TIFERT_R_J</a></li>
+<li class="breadcrumb-item active"><a href="#">GCT_R_J</a></li>
+<li class="breadcrumb-item active"><a href="{% url 'index_tabia'%}">TABIA</a></li>
+<li class="breadcrumb-item active"><a href="#">Utilité_Chaude</a></li>
+<li class="breadcrumb-item active"><a href="#">Utilité_Froide</a></li>
+<li class="breadcrumb-item active"><a href="#">Note/Fax</a></li>
+<li class="breadcrumb-item active"><a href="#">Courriers</a></li>
+<li class="breadcrumb-item active"><a href="{% url 'upload'%}">Photos</a></li>
+{% endblock %}
+
+
+{% block content %}
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_ul }}
+    <button type="submit">Upload</button>
+  </form>
+
+
+
+    <!-- CONTAINER TO DISPLAY THE CROPPED IMAGES -->
+    <div class="row" style="margin-top: 20px">
+    {% for photo in photos %}
+      <div class="col-sm-4 col-md-3">
+      <figure class="figure">
+  <img src="{{ photo.file.url }}" class="thumbnail">
+    <figcaption class="figure-caption">{{ photo.uploaded_at }}</figcaption>
+</figure>
+</div>
+
+    {% endfor %}
+
+{% endblock %}

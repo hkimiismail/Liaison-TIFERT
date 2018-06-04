@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item active"><a href="{% url 'home'%}">Accueil</a></li>
+<li class="breadcrumb-item active"><a href="{% url 'index_tabia'%}">TABIA</a></li>
+{% endblock %}
+
+{% block content %}
+
+
+<!--<div class="container">-->
+<!--  <div class="row justify-content-md-center">-->
+
+
+
+  <div class="mb-4">
+    <a href="{% url 'edit_tabia'  tabias.pk %}" class="btn btn-primary" role="button">Correction</a>
+    <button type="submit" class="btn btn-success " name="pdf"> Print </button>
+    </div>
+
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+
+        <th>Date</th>
+        <th>Défaut</th>
+        <th>Arrêt (h)</th>
+        <th>Text</th>
+        <th>Joint</th>
+      </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+          <td>{{ tabias.jour.date }}</td>
+          <td>{{ tabias.defaut}}</td>
+          <td>{{ tabias.h_a_tabia }}</td>
+          <td>{{ tabias.message }}</td>
+          <td>{{ tabias.doc }}</td>
+
+
+        </tr>
+
+    </tbody>
+  </table>
+  </div>
+    </div>
+
+    {% if rjs.has_other_pages %}
+      <ul class="pagination">
+        {% if rjs.has_previous %}
+          <li><a href="?page={{ users.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in rjs.paginator.page_range %}
+          {% if rjs.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+          {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if rjs.has_next %}
+          <li><a href="?page={{ rjs.next_page_number }}">&raquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+      </ul>
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item active"><a href="{% url 'home'%}">Accueil</a></li>
+<li class="breadcrumb-item active"><a href="{% url 'index_rj'%}">TIFERT_R_J</a></li>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+<!--  <div class="row justify-content-md-center">-->
+    <a href="{% url 'new_rj' %}" class="btn btn-primary">Nouveau Rapport</a>
+
+  <div class="table-responsive">
+  <table class="table table-striped table-sm">
+    <thead class="thead-dark">
+      <tr>
+
+        <th>Date</th>
+        <th>M_U(h)</th>
+        <th>FQ(j-1)</th>
+        <th>FQ(j)</th>
+        <th>H2SO4(T/J)</th>
+        <th>S_H2SO4 (j-1)</th>
+        <th>TK2/1(T)</th>
+        <th>TK2/2(T)</th>
+        <th>T_H2SO4</th>
+        <th>Stck_S_(j-1)</th>
+
+        <th>Stck_S(j)</th>
+        <th>S_consommé</th>
+        <th>P_s_liq</th>
+        <th>R_S_solid</th>
+        <th>TK1/1 (T)</th>
+        <th>TK1/2 (T)</th>
+        <th>FQ tr(début)</th>
+        <th>FQ tr(fin)</th>
+        <th>T_H2SO4_trans</th>
+        <th>P_H3PO4 (T)</th>
+        <th>Arrêt gypse(h)</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for rj in fin_rj_list %}
+        <tr>
+          <td><a href="{% url 'table_rj' rj.pk %}">{{ rj.date.date }}</a></td>
+          <td>{{ rj.h_m_h2so4 }}</td>
+          <td>{{ rj.fqh_p_h2so4 }}</td>
+          <td>{{ rj.fqa_p_h2so4 }}</td>
+          <td>{{ rj.p_acide_h2so4 }}</td>
+          <td>{{ rj.sh_acide_h2so4 }}</td>
+          <td>{{ rj.tk2_1 }}</td>
+          <td>{{ rj.tk2_2 }}</td>
+          <td>{{ rj.titre_p_h2so4 }}</td>
+          <td>{{ rj.sh_s }}</td>
+
+          <td>{{ rj.sa_s }}</td>
+          <td>{{ rj.s_c }}</td>
+          <td>{{ rj.p_s_liq }}</td>
+          <td>{{ rj.r_s_solid }}</td>
+          <td>{{ rj.tk1_1 }}</td>
+          <td>{{ rj.fqd_t_h2so4 }}</td>
+          <td>{{ rj.fqf_t_h2so4 }}</td>
+          <td>{{ rj.t_acide_h2so4 }}</td>
+
+          <td>{{ rj.titre_t_h2so4 }}</td>
+          <td>{{ rj.p_acide_h3po4 }}</td>
+          <td>{{ rj.h_a_gypse }}</td>
+
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+      {% if fin_rj_list.has_other_pages %}
+          <nav aria-label="fin_rj_list pagination" class="mb-4">
+            <ul class="pagination">
+              {% if fin_rj_list.has_previous %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ fin_rj_list.previous_page_number }}">Previous</a>
+                </li>
+              {% else %}
+                <li class="page-item disabled">
+                  <span class="page-link">Previous</span>
+                </li>
+              {% endif %}
+
+              {% for page_num in fin_rj_list.paginator.page_range %}
+                {% if fin_rj_list.number == page_num %}
+                  <li class="page-item active">
+                    <span class="page-link">
+                      {{ page_num }}
+                      <span class="sr-only">(current)</span>
+                    </span>
+                  </li>
+                {% else %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                  </li>
+                {% endif %}
+              {% endfor %}
+
+              {% if fin_rj_list.has_next %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ fin_rj_list.next_page_number }}">Next</a>
+                </li>
+              {% else %}
+                <li class="page-item disabled">
+                  <span class="page-link">Next</span>
+                </li>
+              {% endif %}
+            </ul>
+          </nav>
+        {% endif %}
+
+  </div>
+{% endblock %}

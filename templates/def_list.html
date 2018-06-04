@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <form method="get">
+    {{ filter.form.as_ul}}
+    <button type="submit">Search</button>
+  </form>
+  <ul>
+  {% for def in filter.qs %}
+    <li>{{ def.defaut}} - {{ def.h_a_tabia }}</li>
+  {% endfor %}
+  </ul>
+{% endblock %}

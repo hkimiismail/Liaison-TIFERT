@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+  <tr>
+  <li class="breadcrumb-item active"><a href="{% url 'tabia' %}">TABIA</a></li>
+
+  <li class="breadcrumb-item active"><a href="{% url 'home' %}">TIFERT</a></li>
+  <li class="breadcrumb-item active"><a href="{% url 'upload' %}">Gallerie (Photo)</a></li>
+
+    <tr>
+{% endblock %}
+
+{% block content %}
+  <table class="table">
+    <thead class="thead-inverse">
+
+    </thead>
+    <tbody>
+      <!-- CONTAINER TO DISPLAY THE CROPPED IMAGES -->
+      <div class="row" style="margin-top: 20px">
+
+        <div class="col-sm-4 col-md-3">
+          <img src="{{ photos.document.url }}" class="thumbnail">
+        </div>
+
+
+    </tbody>
+  </table>
+{% endblock %}
